@@ -72,7 +72,7 @@ function App() {
 
   return (
     <>
-      <div className="container min-h-screen h-auto w-auto flex flex-col gap-40 md:gap-20">
+      <div className="container min-h-screen h-auto w-auto flex flex-col  gap-20">
         <h1 className="app_title text-center text-4xl  pt-5">
           Background Changer
         </h1>
