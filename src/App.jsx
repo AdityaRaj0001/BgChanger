@@ -10,7 +10,6 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const handleimageinput = (e) => {
-    
     const file = e.target.files[0];
     setImage(file);
   };
@@ -30,11 +29,15 @@ function App() {
     setImageurl("");
   };
 
-  const download=()=>{
-    if(imageurl){
-      saveAs(imageurl,"bgChanger.png")
+  const download = () => {
+    if (imageurl) {
+      saveAs(imageurl, "bgChanger.png");
     }
-  }
+  };
+
+  const handlecopy = (e) => {
+    setPrompt(e.target.textContent);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,20 +81,43 @@ function App() {
         </h1>
 
         {step === 1 && (
-          <div className="prompt_card w-[80%] h-1/6 flex  items-center justify-center gap-2 mx-auto">
-            <input
-              className="prompt_input w-full text-bold border-black border-2 sm:w-[300px] h-[30px] p-5 "
-              value={prompt}
-              onChange={handlepromptchange}
-              placeholder="Describe your background"
-            ></input>
-            <button
-              className="border-black bg-blue-300 p-5 h-[30px] flex items-center border-2 rounded-sm "
-              onClick={handlestepchange}
-            >
-              Next
-            </button>
-          </div>
+          <>
+            <div className="prompt_card w-[80%] h-1/6 flex  items-center justify-center gap-2 mx-auto">
+              <input
+                className="prompt_input w-full text-bold border-black border-2 sm:w-[300px] h-[30px] p-5 "
+                value={prompt}
+                onChange={handlepromptchange}
+                placeholder="Describe your background"
+              ></input>
+              <button
+                className="border-black bg-blue-300 p-5 h-[30px] flex items-center border-2 rounded-sm "
+                onClick={handlestepchange}
+              >
+                Next
+              </button>
+            </div>
+            <div className="flex flex-col w-full gap-10">
+              <p className="text-center text-2xl font-semi-bold">Click to Copy!</p>
+              <div className="w-[90%] mx-auto flex flex-wrap justify-between text-sm ">
+                <div className="bg-blue-400 w-[30%] p-2  h-auto text-[15px] hover:cursor-pointer">
+                  <p onClick={handlecopy}>
+                    New York City, UltraHigh quality, Sunlight,Street Photography.
+                  </p>
+                </div>
+                <div className="bg-blue-400 w-[30%] p-2  h-auto text-[15px] hover:cursor-pointer">
+                  <p onClick={handlecopy}>
+                    Game of Thrones, Medieval Castles, Epic Fantasy.
+                  </p>
+                </div>
+                <div className="bg-blue-400 w-[30%] p-2  h-auto text-[15px] hover:cursor-pointer">
+                  <p onClick={handlecopy}>
+                    Japanese city street, Tokyo, UltraHigh quality, NightTime,
+                    CityLights
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
         )}
 
         {step === 2 && (
@@ -126,16 +152,25 @@ function App() {
             {!loading && imageurl !== "" && (
               <div className="flex w-full flex-col mx-auto gap-5 items-center">
                 <div className="resultdisplaycontainer  w-[90%]  flex flex-col gap-5 items-center">
-                  <h2 className="text-lg md:text-2xl font-semibold w-full max-w-[300px]">Response Image:</h2>
+                  <h2 className="text-lg md:text-2xl font-semibold w-full max-w-[300px]">
+                    Response Image:
+                  </h2>
                   <img className="w-full max-w-[300px]" src={imageurl}></img>
                 </div>
                 <div className="flex gap-16">
-
-                <button className="text-xl sm:text-2xl bg-blue-300 border-slate-700 border-4 p-4  hover:bg-blue-500" onClick={download}>Download</button>
-                <button className=" text-xl sm:text-2xl bg-blue-300 border-slate-700 border-4 p-4 hover:bg-blue-500" onClick={retry}>Retry</button>
-
+                  <button
+                    className="text-xl sm:text-2xl bg-blue-300 border-slate-700 border-4 p-4  hover:bg-blue-500"
+                    onClick={download}
+                  >
+                    Download
+                  </button>
+                  <button
+                    className=" text-xl sm:text-2xl bg-blue-300 border-slate-700 border-4 p-4 hover:bg-blue-500"
+                    onClick={retry}
+                  >
+                    Retry
+                  </button>
                 </div>
-                
               </div>
             )}
           </>
