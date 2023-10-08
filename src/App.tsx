@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import CaptureImageComponent from "./CaptureImageComponent"
-import Promptinput from "./Promptinput"
+import Promptinput from "./PromptInput"
 import PreviewComponent from "./PreviewComponent";
 
 export const dataURItoBlob = (dataURI: string): Blob => {
